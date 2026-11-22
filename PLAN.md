@@ -35,8 +35,9 @@ Sonda Phantom ilə canlı "döyüş" və **detektiv sualı**: Phantom şirkətin
 | Nigar Quliyeva | Mühasib | |
 | Tural Məmmədov | Stajor | |
 
-- Phantom-un kim olduğunu **Claude Code seçir** və bütün ipuclarını ona uyğun qurur (alibi, loglardakı vaxt,
-  OSINT profili, gündəlik, ofisdəki əşyalar). Ən aşkar şübhəli (məs. sistem admini) **Phantom olmamalıdır** — bu, yalançı izdir.
+- Phantom **hər oyunda təsadüfi** seçilir, yalnız **Leyla, Nigar və Tural** arasından. Bütün detektiv ipucları (alibi, loglardakı vaxt,
+  OSINT profili, gündəlik, ofisdəki əşyalar) seçilmiş şəxsə uyğun generasiya olunur və **hər variantda** məntiqi yolla tapıla bilməlidir.
+- **Murad Əliyev (sistem admini) heç vaxt Phantom deyil** — o, həmişə yalançı izdir (ən aşkar şübhəli).
 - Hər aktda ən azı 1 detektiv ipucu olmalıdır. Final sualında oyunçu cavabını yalnız toplanmış ipucları ilə məntiqi yolla çıxara bilməlidir.
 - Toplanmış ipucları "**Sübutlar**" panelində görünür.
 
@@ -58,14 +59,14 @@ tapmacalar istisnadır.
   Ekranda **fırladılan şifrə diski** aləti var, oyunçu diski çevirib sözü oxuyur. Açar (sürüşmə) otaqdakı başqa əşyadadır.
 - **[Kiber] Saxta e-poçt:** 3 məktubdan hansı phishing-dir? Əlamətlər: səhv ünvan (`paypa1.com` kimi), "TƏCİLİ!",
   şübhəli link, qrammatik səhvlər. Düzgün seçəndə qısa izah.
-- **[Kiber] Ən güclü parol:** 4 variantdan seç (məs. `123456`, `Roya2007`, `qwerty`, `T!g3r-Bulud-92`).
+- **[Kiber] Ən güclü parol:** 4 variantdan seç (məs. `123456`, `Aysel2005`, `qwerty`, `T!g3r-Bulud-92`).
 - **[Dünyagörüşü] Dünya saatları:** divarda 4 saat — Bakı, London, Tokio, Nyu-York. **Qış vaxtı** sabit fərqlərlə işlə:
   Bakı UTC+4, London UTC+0, Tokio UTC+9, Nyu-York UTC−5. Məs.: "Bakıda 12:00 olanda digər şəhərlərdə saat neçədir?"
   Nəticədəki rəqəmlər PIN kodu yaradır. Oyunda "qış vaxtı" olduğunu açıq yaz.
 - **[Məntiq] Kitab şifrəsi:** rəfdə "Phantom-un gündəliyi" (mətni Claude Code özü yazır — real kitabdan sitat yox).
   Kağızda `səhifə-sətir-söz` nömrələri → söz.
 - **[IT] Rəng kodları:** `#FF0000` qırmızı, `#00FF00` yaşıl, `#0000FF` göy kimi HEX kodlar; rənglərin adlarından/baş hərflərindən söz və ya rəqəm çıxır.
-- Tapılanlar: **açar kart** (server otağına keçid), açar parçası №1, detektiv ipucu.
+- Tapılanlar: **açar kart** (server otağına keçid), açar parçalarından biri, detektiv ipucu.
 
 ### Akt 2 — Server otağı
 - **[Kiber] Log tapmacası:** 10–12 sətirlik giriş jurnalı; ən çox `FAIL` yazılan IP hücumçudur. "FAIL-ləri göstər" filtr düyməsi var.
@@ -73,7 +74,7 @@ tapmacalar istisnadır.
 - **[IT] Məntiq sxemi:** AND / OR / NOT qapılarından ibarət sxem; oyunçu girişləri (0/1) elə seçir ki, çıxış 1 olsun və qapı açılsın.
 - **[Tarix] Sual-kilid:** "İlk kompüter 'bug'-u nə idi?" — 1947-ci ildə Harvard Mark II kompüterində tapılan **güvə** (Grace Hopper-in komandası).
 - **Hadisə:** işıq sönür → inventardakı **fənər** ilə otağı işıqlandırmaq lazımdır (fənər Akt 1-də və ya burada tapılır).
-- Tapılanlar: açar parçası №2, detektiv ipucu (məs. log vaxtları alibi ilə uyğun gəlmir).
+- Tapılanlar: açar parçalarından biri, detektiv ipucu (məs. log vaxtları alibi ilə uyğun gəlmir).
 
 ### Akt 3 — Phantom-un maşını
 - **[Kiber] Sadə terminal:** cəmi bir neçə əmr — `help`, `ls`, `ls -a` (gizli fayllar), `cat <fayl>`, `clear`, `unlock <kod>`.
@@ -86,7 +87,7 @@ tapmacalar istisnadır.
   Başqa söz istifadə etsən, hər nömrəni dövri cədvəllə yoxla. Ekranda sadə dövri cədvəl aləti olsun.
 - **[Riyaziyyat] Seyf:** Fibonacci (`1 1 2 3 5 8 ?` → 13) və ya sadə ədədlər ardıcıllığı.
 - **UV fənəri + poster** kombinasiyası: inventarda iki əşyanı birləşdir → posterdə gizli yazı görünür.
-- Tapılanlar: açar parçası №3, detektiv ipucu (OSINT profili Phantom-a işarə edir).
+- Tapılanlar: açar parçalarından biri, detektiv ipucu (OSINT profili Phantom-a işarə edir).
 
 ### Akt 4 — C2 server (Phantom-un idarəetmə paneli)
 - **[Kiber] Standart parol:** panel `admin` / `admin` ilə açılır. Dərs: standart parolları həmişə dəyiş.
@@ -96,12 +97,13 @@ tapmacalar istisnadır.
 - **[Musiqi] Notlar:** A–G not hərflərindən söz (məs. `CAFE`, `FACE`, `BADGE`, `CABBAGE`). Melodiya səslənir,
   oyunçu onu pianoda təkrarlayır (Simon oyunu kimi, Web Audio ilə).
 - **[Tarix] Sual-kilid:** "İlk e-poçt hansı ildə göndərilib?" — **1971**, Ray Tomlinson (`@` simvolunu da o seçib).
-- Tapılanlar: açar parçası №4, son detektiv ipucu.
+- Tapılanlar: açar parçalarından biri, son detektiv ipucu.
 
 ### Final — Kill switch
 - **Tapşırıq meneceri:** Windows-dakı kimi proseslər siyahısı; şübhəli prosesi tap (məs. `svch0st.exe` — sıfır ilə, 99% CPU)
   və "Dayandır" düyməsini bas. Yanlış (vacib sistem) prosesi dayandırmaq cərimədir.
-- 4 açar parçasını düzgün ardıcıllıqla birləşdir → kill switch.
+- 4 açar parçasını düzgün ardıcıllıqla birləşdir → kill switch. Hər parçanın üzərində **Roma rəqəmi (I–IV)** var;
+  rəqəmlər aktlara **hər oyunda qarışıq** paylanır (məs. Akt 1-də III çıxa bilər). Final ardıcıllığı rəqəmlərə görədir: I → II → III → IV.
 - Bu zaman Phantom "canlı" müqavimət göstərir (əks-hücumlar tezləşir, qısa geri sayım).
 - **Detektiv sualı:** "Phantom kimdir?" — 4 şübhəlidən birini seç (Sübutlar panelinə baxaraq).
 - Sonra müvafiq sonluq kat-səhnəsi və **"Nə öyrəndin?"** ekranı.
@@ -110,7 +112,8 @@ tapmacalar istisnadır.
 
 - **İnventar:** əşyaları topla, üzərinə klik edib bax, iki əşyanı birləşdir (məs. UV lampa + poster). Bəzi qapılar yalnız əşya ilə açılır.
 - **Xəritə:** açılmış otaqlar arasında keçid.
-- **Vaxt limiti** (ümumi oyun üçün): Asan 60 dəq, Orta 45 dəq, Çətin 30 dəq.
+- **Vaxt limiti** (ümumi oyun üçün): Asan 90 dəq, Orta 60 dəq, Çətin 40 dəq.
+  Kat-səhnələr, "Bilirdinmi?" kartları və izah ("?") pəncərələri açıq olanda **timer dayanır**.
 - **İz sayğacı (0–100%):** yanlış cavablar, təsadüfi təxminlər, phishing-ə klikləmək sayğacı artırır. 100% → uduzma.
   Hər akt bitəndə bir az azalır.
 - **Xal sistemi:** başlanğıc 1000; düzgün tapmaca +100; yanlış −20; hint çətinliyə görə −25/−50/−75. Sonda rütbə.
@@ -179,7 +182,7 @@ Yalnız dəqiq bildiyin faktları yaz. Əmin olmadığın faktı yazma. Yoxlanı
 ## 8. İş mərhələləri
 
 Hər mərhələdən sonra: **dayan**, nə etdiyini qısa yaz, mənə nəyi yoxlamalı olduğumu de, commit et
-(Azərbaycanca mesajla) və mən "davam" yazana qədər gözlə. Bitən mərhələni burada `[x]` et.
+(Azərbaycanca mesajla), push et və mən "davam" yazana qədər gözlə. Bitən mərhələni burada `[x]` et.
 
 - [ ] **0. Hazırlıq** — köhnə `index.html`-i `legacy/index.html`-ə köçür; `CLAUDE.md`-ni yeni struktura uyğun yenilə
       (tək fayl qaydasını sil, bu PLAN.md-yə istinad əlavə et); qovluq strukturunu yarat.
