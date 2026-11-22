@@ -1,6 +1,5 @@
-/* js/audio/music.js — Web Audio ilə yaradılan fon musiqisi.
-   Skelet (Mərhələ 0). Əsas kod Mərhələ 7-də yazılacaq. ES modules yoxdur: hər fayl global Game-ə əlavə edir. */
+/* js/audio/music.js — Web Audio ilə yaradılan fon musiqisi (Game.settings.music).
+   Hələ boşdur: Mərhələ 7-də yazılacaq. */
 (function (Game) {
   'use strict';
-  Game.loaded.push('audio/music');
-})(window.Game = window.Game || { loaded: [] });
+})(window.Game = window.Game || {});

@@ -7,36 +7,51 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<main id="app">
-  <h1>Kill Switch: Phantom</h1>
-  <p>Yeni versiya hazırlanır.</p>
-  <p id="status">Yüklənir...</p>
-  <p><a href="legacy/index.html">Köhnə versiyanı oyna</a></p>
-</main>
-<!-- Sıra vacibdir: əvvəl əsas modullar, sonda main.js -->
+<div id="app">
+  <section id="screen-menu" class="screen on" aria-label="Əsas menyu"></section>
+  <section id="screen-game" class="screen" aria-label="Oyun">
+    <header id="hud"></header>
+    <main id="scene"></main>
+    <footer id="bar"></footer>
+  </section>
+  <section id="screen-end" class="screen" aria-label="Oyunun sonu"></section>
+</div>
+<div id="overlays"></div>
+<div id="toasts" aria-live="polite"></div>
+<noscript><p class="noscript">Oyun üçün brauzerdə JavaScript açıq olmalıdır.</p></noscript>
+
+<!-- ES modules yoxdur: adi skriptlər, hamısı global Game obyektinə əlavə edir. Sıra vacibdir. -->
+<!-- 1. Əsas modullar -->
+<script src="js/core/events.js"></script>
 <script src="js/core/state.js"></script>
 <script src="js/core/save.js"></script>
 <script src="js/core/timer.js"></script>
 <script src="js/core/trace.js"></script>
-<script src="js/core/events.js"></script>
+<script src="js/core/puzzles.js"></script>
+<!-- 2. Hekayə və mətnlər (otaqlardan əvvəl yüklənməlidir) -->
+<script src="js/story/texts.js"></script>
+<script src="js/story/suspects.js"></script>
+<script src="js/story/facts.js"></script>
+<!-- 3. İnterfeys -->
+<script src="js/ui/popup.js"></script>
 <script src="js/ui/hud.js"></script>
 <script src="js/ui/inventory.js"></script>
 <script src="js/ui/map.js"></script>
 <script src="js/ui/dialog.js"></script>
-<script src="js/ui/popup.js"></script>
 <script src="js/ui/tools.js"></script>
+<!-- 4. Səs və terminal -->
 <script src="js/audio/music.js"></script>
 <script src="js/audio/sfx.js"></script>
 <script src="js/terminal/terminal.js"></script>
+<!-- 5. Otaqlar -->
 <script src="js/rooms/act1.js"></script>
 <script src="js/rooms/act2.js"></script>
 <script src="js/rooms/act3.js"></script>
 <script src="js/rooms/act4.js"></script>
 <script src="js/rooms/final.js"></script>
-<script src="js/story/texts.js"></script>
-<script src="js/story/suspects.js"></script>
+<!-- 6. Sonluqlar, debug və başlanğıc -->
 <script src="js/story/endings.js"></script>
-<script src="js/story/facts.js"></script>
+<script src="js/core/debug.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

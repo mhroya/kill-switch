@@ -1,6 +1,7 @@
 /* js/rooms/act4.js — Akt 4 — C2 server.
-   Skelet (Mərhələ 0). Əsas kod Mərhələ 5-də yazılacaq. ES modules yoxdur: hər fayl global Game-ə əlavə edir. */
+   MÜVƏQQƏTİ: Mərhələ 1-də mühərriki yoxlamaq üçün test otağıdır. Əsl otaq Mərhələ 5-də yazılacaq. */
 (function (Game) {
   'use strict';
-  Game.loaded.push('rooms/act4');
-})(window.Game = window.Game || { loaded: [] });
+
+  Game.room.testRoom({ id: 'c2', name: Game.T.rooms.c2, color: '#26110f', fact: Game.FACTS.email });
+})(window.Game = window.Game || {});

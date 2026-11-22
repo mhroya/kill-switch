@@ -1,6 +1,5 @@
-/* js/audio/sfx.js — Web Audio ilə səs effektləri.
-   Skelet (Mərhələ 0). Əsas kod Mərhələ 7-də yazılacaq. ES modules yoxdur: hər fayl global Game-ə əlavə edir. */
+/* js/audio/sfx.js — Web Audio ilə səs effektləri (Game.settings.sfx).
+   Hələ boşdur: Mərhələ 7-də yazılacaq. */
 (function (Game) {
   'use strict';
-  Game.loaded.push('audio/sfx');
-})(window.Game = window.Game || { loaded: [] });
+})(window.Game = window.Game || {});

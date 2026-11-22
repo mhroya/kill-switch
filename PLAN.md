@@ -186,7 +186,7 @@ Hər mərhələdən sonra: **dayan**, nə etdiyini qısa yaz, mənə nəyi yoxla
 
 - [x] **0. Hazırlıq** — köhnə `index.html`-i `legacy/index.html`-ə köçür; `CLAUDE.md`-ni yeni struktura uyğun yenilə
       (tək fayl qaydasını sil, bu PLAN.md-yə istinad əlavə et); qovluq strukturunu yarat.
-- [ ] **1. Mühərrik** — state, save/load, timer, iz sayğacı, xal, HUD, otaq sistemi, xəritə, inventar, popup-lar,
+- [x] **1. Mühərrik** — state, save/load, timer, iz sayğacı, xal, HUD, otaq sistemi, xəritə, inventar, popup-lar,
       çətinlik seçimi, giriş ekranı, debug rejimi. Test üçün boş otaqlarla.
 - [ ] **2. Akt 1** — ofis otağı və bütün tapmacaları + şifrə diski aləti.
 - [ ] **3. Akt 2** — server otağı, log filtri, Morze, məntiq sxemi, işıq sönməsi + fənər.
