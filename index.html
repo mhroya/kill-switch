@@ -1,101 +1,42 @@
 <!DOCTYPE html>
-<html lang="az"><head><meta charset="utf-8"><title>Hacker Əməliyyatı: Otaq</title>
+<html lang="az">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>
-:root{color-scheme:dark;--bg:#0a1210;--panel:#12201a;--line:#1f6b3a;--g:#39ff6a;--a:#ffc933;--t:#d6efe0;--m:#8fb9a0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-html,body{height:100%;margin:0;background:var(--bg);color:var(--t);font-family:'Courier New',monospace}
-body{display:flex;flex-direction:column}
-#rain{position:fixed;inset:0;opacity:.12;z-index:0}
-#top{z-index:1;display:flex;gap:16px;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--line);font-size:15px;flex-wrap:wrap}
-#top b{color:var(--g)}
-#room{z-index:1;flex:1;min-height:0;display:flex;justify-content:center;padding:6px}
-svg{max-width:100%;max-height:100%}
-.hs{cursor:pointer;outline:none}.hs .glow{fill:none;stroke:var(--a);stroke-width:2;opacity:0;stroke-dasharray:6 4}
-.hs:hover .glow,.hs:focus .glow{opacity:1}.pulse{animation:p 2s infinite}@keyframes p{50%{opacity:.25}}
-text{font-family:'Courier New',monospace}
-#term{z-index:1;height:34%;min-height:150px;background:#050a08;border-top:1px solid var(--g);display:flex;flex-direction:column;padding:8px 14px;font-size:15px}
-#log{flex:1;overflow-y:auto;white-space:pre-wrap}#log .e{color:#ff6b6b}#log .s{color:var(--g)}#log .h{color:var(--a)}
-#cl{display:flex;gap:8px}#cl span{color:var(--g)}#in{flex:1;background:none;border:0;color:var(--t);font:inherit;outline:none}
-.ov{position:fixed;inset:0;z-index:5;background:rgba(5,10,8,.93);display:none;align-items:center;justify-content:center;padding:20px}
-.ov.on{display:flex}.card{max-width:560px;width:100%;background:var(--panel);border:1px solid var(--g);border-radius:14px;padding:24px;max-height:85%;overflow:auto}
-.card h2{margin:0 0 12px;color:var(--g);font-size:24px}.card pre{white-space:pre-wrap;font:inherit;font-size:17px;line-height:1.5;margin:0 0 16px}
-button{background:var(--g);color:#0a1210;border:0;border-radius:8px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer}
-</style></head><body>
-<canvas id="rain"></canvas>
-<div id="top"><span>Mərhələ <b id="st">1</b>/5</span><span>Xal <b id="sc">500</b></span><span>Vaxt <b id="tm">00:00</b></span><span id="snd" style="cursor:pointer">Səs: <b>açıq</b></span></div>
-<div id="room"><svg viewBox="0 0 960 500" role="img" aria-label="Hakerin otağı">
-<rect width="960" height="500" fill="#0f1c17"/><polygon points="0,400 960,400 960,500 0,500" fill="#0a120f"/>
-<g class="hs" data-o="board" tabindex="0"><rect x="40" y="50" width="260" height="160" fill="#d6efe0" rx="6"/><text x="60" y="95" font-size="16" fill="#0a1210">silməyin!</text><text x="60" y="150" font-size="34" font-weight="700" fill="#0a1210" id="bc">...</text><rect class="glow" x="36" y="46" width="268" height="168" rx="8"/><text x="40" y="232" font-size="14" fill="#8fb9a0">Lövhə</text></g>
-<g class="hs" data-o="monitor" tabindex="0"><rect x="340" y="50" width="260" height="150" fill="#050a08" stroke="#39ff6a" stroke-width="3" rx="6"/><text x="356" y="90" font-size="18" fill="#39ff6a">0101 0010 ...</text><text x="356" y="120" font-size="18" fill="#39ff6a" class="pulse">0100 1111 ...</text><rect x="565" y="165" width="34" height="34" fill="#ffc933" transform="rotate(6 582 182)"/><text x="570" y="188" font-size="22" fill="#0a1210">?</text><rect class="glow" x="336" y="46" width="268" height="158" rx="8"/><text x="340" y="222" font-size="14" fill="#8fb9a0">Divar monitoru</text></g>
-<g class="hs" data-o="poster" tabindex="0"><rect x="640" y="50" width="120" height="160" fill="#3a2d0a" stroke="#ffc933" rx="4"/><text x="660" y="90" font-size="20" fill="#ffc933">ASCII</text><text x="654" y="125" font-size="14" fill="#d6efe0">A=65 B=66</text><text x="654" y="150" font-size="14" fill="#d6efe0">...Z=90</text><rect class="glow" x="636" y="46" width="128" height="168" rx="6"/><text x="650" y="232" font-size="14" fill="#8fb9a0">Poster</text></g>
-<g class="hs" data-o="calendar" tabindex="0"><rect x="800" y="50" width="120" height="130" fill="#d6efe0" rx="4"/><rect x="800" y="50" width="120" height="28" fill="#c0392b"/><text x="822" y="125" font-size="38" fill="#0a1210">21</text><text x="815" y="155" font-size="13" fill="#0a1210">Qeydlərim</text><rect class="glow" x="796" y="46" width="128" height="138" rx="6"/><text x="816" y="202" font-size="14" fill="#8fb9a0">Təqvim</text></g>
-<g class="hs" data-o="rack" tabindex="0"><rect x="50" y="260" width="130" height="180" fill="#16241d" stroke="#1f6b3a" rx="4"/><g fill="#39ff6a"><circle cx="75" cy="290" r="5" class="pulse"/><circle cx="75" cy="320" r="5"/><circle cx="75" cy="350" r="5" class="pulse"/></g><rect x="95" y="280" width="70" height="14" fill="#050a08"/><rect x="95" y="310" width="70" height="14" fill="#050a08"/><rect x="95" y="340" width="70" height="14" fill="#050a08"/><rect class="glow" x="46" y="256" width="138" height="188" rx="6"/><text x="52" y="462" font-size="14" fill="#8fb9a0">Server</text></g>
-<rect x="260" y="370" width="440" height="22" fill="#2a1f12"/><rect x="280" y="392" width="14" height="90" fill="#2a1f12"/><rect x="666" y="392" width="14" height="90" fill="#2a1f12"/>
-<g class="hs" data-o="laptop" tabindex="0"><polygon points="400,370 560,370 545,300 415,300" fill="#050a08" stroke="#39ff6a" stroke-width="2"/><text x="430" y="340" font-size="16" fill="#39ff6a" class="pulse">&gt; _</text><rect class="glow" x="396" y="296" width="168" height="78" rx="4"/><text x="425" y="414" font-size="14" fill="#8fb9a0">Noutbuk</text></g>
-<g class="hs" data-o="usb" tabindex="0"><rect x="600" y="350" width="70" height="20" fill="#3a6fb0" rx="3"/><rect x="668" y="355" width="16" height="10" fill="#c9c9c9"/><rect class="glow" x="596" y="346" width="92" height="28" rx="4"/><text x="610" y="414" font-size="14" fill="#8fb9a0">USB</text></g>
-<g class="hs" data-o="door" tabindex="0"><rect x="800" y="240" width="120" height="210" fill="#1b2b24" stroke="#ffc933" stroke-width="3" rx="4"/><rect x="822" y="300" width="76" height="30" fill="#050a08" stroke="#39ff6a"/><text x="830" y="322" font-size="16" fill="#39ff6a" id="dlock">KİLİDLİ</text><circle cx="895" cy="360" r="7" fill="#ffc933"/><rect class="glow" x="796" y="236" width="128" height="218" rx="6"/><text x="830" y="470" font-size="14" fill="#8fb9a0">Qapı</text></g>
-<g class="hs" data-o="bin" tabindex="0"><path d="M720 400 h40 l-4 50 h-32z" fill="#2a2f2c" stroke="#8fb9a0"/><rect class="glow" x="714" y="396" width="52" height="60" rx="4"/><text x="716" y="474" font-size="14" fill="#8fb9a0">Zibil</text></g></svg></div>
-<div id="term"><div id="log"></div><div id="cl"><span>$</span><input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal" placeholder="help, ls, cat mission.txt, unlock KOD, hint"></div></div>
-<div class="ov on" id="intro"><div class="card"><h2>&gt; XƏBƏRDARLIQ: noutbukun hacklənib</h2><pre>Hacker sənin noutbukunu ələ keçirib. Otaqda gizlənmiş 5 qapını ardıcıl aça bilsən, onu bloklaya bilərsən.
-
-Otaqdakı lövhələrə, monitora, posterə, serverə, USB-yə və təqvimə kliklə: ipuclar oradadır.
-Cavabı terminalda yaz: unlock KOD
-
-Vaxt limiti var və kodlar hər oyunda təsadüfidir.
-Xal: başlanğıc 500, düzgün +100, yanlış -20, hint: Asan -25, Orta -50, Çətin -75.
-Çətinlik seç:</pre><div id="dif" style="display:flex;gap:8px;flex-wrap:wrap"><button data-d="e">Asan</button><button data-d="m">Orta</button><button data-d="h">Çətin</button></div></div></div>
-<div class="ov" id="pop"><div class="card"><h2 id="pt"></h2><pre id="pb"></pre><button id="pc">Bağla</button></div></div>
-<script>
-const $=i=>document.getElementById(i),pick=a=>a[Math.random()*a.length|0],ri=(a,b)=>a+(Math.random()*(b-a+1)|0);
-const DF={e:{t:1200,h:25},m:{t:720,h:50},h:{t:480,h:75}};
-let G,D,stage=1,score=500,left=0,on=false,sound=true,ac,hints=0,wrong=0,hist=[];
-const log=$('log'),inp=$('in');
-function gen(){const w1=pick(["FIREWALL","MALWARE","PHISHING","ROUTER","TROJAN","BACKDOOR"]),w2=pick(["ROOT","ADMIN","SUDO","SHELL"]),w4=pick(["laser","cipher","proxy","token","vault"]),k=ri(2,9),ip=`${ri(11,223)}.${ri(1,254)}.${ri(1,254)}.${ri(2,250)}`,d=`10.0.0.${ri(2,9)}`;
-const rows=[];for(let i=0;i<5;i++)rows.push(["FAIL",pick(["admin","root"]),ip]);rows.push(["FAIL","bob",d],["FAIL","bob",d],["OK","alice","10.0.0.5"],["OK","bob",d],["OK","carol","10.0.0.7"]);
-rows.sort(()=>Math.random()-.5);
-return{w1,w2,w4,k,ip,lg:rows.map((r,i)=>`10:${String(i+1).padStart(2,'0')} ${r[0].padEnd(4)} ${r[1].padEnd(6)} ${r[2]}`).join("\n"),enc:w1.replace(/[A-Z]/g,c=>String.fromCharCode((c.charCodeAt(0)-65+k)%26+65)),bin:w2.split('').map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' '),b64:btoa(w4),kill:(w1[0]+w2[0]+ip.split('.')[3]).toLowerCase(),dip:ip.split('.').slice(0,2).join('.')+'.'+ri(1,254)+'.'+ri(2,250),dk:pick(["MR","TS","BK","PX","LD"])+ri(10,99)}}
-const OBJ={
-board:{st:1,t:"Lövhə",b:()=>"~~~~~~~~~~~~~~~~\nserver yenilə ✓\nparol dəyiş ✗\n~~~~~~~~~~~~~~~~\n\n"+G.enc+"\n  ↑ J.Sezar? k=?\n\ncümə 15:00 görüş\n░▒▓ silinib ▓▒░"},
-monitor:{st:0,t:"Divar monitoru",b:()=>"[post-it] -"+G.k+"\n\n[ekran]\n"+G.bin},
-poster:{st:2,t:"Poster",b:()=>"65 A   66 B   67 C\n  ...\n88 X   89 Y   90 Z\n\n0100 0001 = 65"},
-rack:{st:3,t:"Server",b:()=>"/var/log/auth.log\n\n"+G.lg},
-usb:{st:4,t:"USB",b:()=>"# backup, paylaşma\n"+G.b64},
-calendar:{st:5,t:"Təqvim",b:()=>"Cümə: ehtiyat plan\n\nkill = a1[0] + a2[0] + ip[3]\n\n(hamısı kiçik hərflə)"},
-bin:{st:0,t:"Zibil qutusu",b:()=>"▒▓░ ▒░▓▒ ░▓\n...bu gecə yenidən girəcək\nhədəf: "+G.dip+"\nişarə kodu: "+G.dk+"\n░▒▓▒ ▓░▒▒░ ▒▓░"},
-laptop:{st:0,t:"Noutbuk",b:()=>"Terminal aşağıdadır. Əmrlər: help, ls, cat, grep, whoami, pwd, history, base64 -d, unlock, hint, status"},
-door:{st:0,t:"Qapı",b:()=>"Hər düzgün kodla bir qapı açılır. 5-ci qapı kill switch-dir."}};
-const M=["","Mərhələ 1: Lövhədəki mesajı Sezar şifrəsi ilə aç.","Mərhələ 2: Monitordakı ikilik kodu mətnə çevir.","Mərhələ 3: Jurnalda hücumçu IP-ni tap.","Mərhələ 4: USB-dəki Base64 mətni geri çevir.","Mərhələ 5 (kill switch): Təqvimdəki qaydaya görə kod yarat."];
-const HM=["","[HACKER] Noutbuk artıq mənimdir. Sınaq edə bilərsən.","[HACKER] Birinci qapı təsadüf idi.","[HACKER] Jurnalda iz qoymamışam, axtarma!","[HACKER] Gizli fayla toxunma!","[HACKER] Son şans... kill switch-i tapa bilməzsən."];
-const ANS=()=>[0,G.w1.toLowerCase(),G.w2.toLowerCase(),G.ip,G.w4,G.kill][stage];
-const HT=()=>[0,`Açar ${G.k}: hər hərfi əlifbada ${G.k} geri apar.`,`Hər 8 bit bir hərfdir. İlk qrup onluqda ${parseInt(G.bin.split(' ')[0],2)}.`,"Ən çox FAIL olan ünvan hücumçudur. grep FAIL auth.log istifadə et.",`Terminalda: base64 -d ${G.b64}`,`Kod: ${G.kill.toUpperCase()}`][stage];
-function beep(f,d,ty="square"){if(!sound||!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}
-function ok(){beep(520,.1);setTimeout(()=>beep(780,.18),110)}function bad(){beep(130,.3,"sawtooth")}
-function out(t,c){const d=document.createElement('div');if(c)d.className=c;log.appendChild(d);let i=0;const iv=setInterval(()=>{d.textContent=t.slice(0,i+=3);log.scrollTop=1e5;if(i>=t.length)clearInterval(iv)},8)}
-function hud(){$('st').textContent=Math.min(stage,5);$('sc').textContent=score}
-const mmss=s=>String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-setInterval(()=>{if(!on)return;left--;$('tm').textContent=mmss(left);if(left<=0)lose()},1000);
-function pop(t,b){$('pt').textContent=t;$('pb').textContent=b;$('pop').classList.add('on')}
-document.querySelectorAll('.hs').forEach(g=>{const f=()=>{if(!on)return;const o=OBJ[g.dataset.o];beep(300,.05);pop(o.t,o.st>stage?"Bu ipucu hələ kilidlidir. Əvvəlki mərhələni bitir.":o.b())};g.onclick=f;g.onkeydown=e=>{if(e.key==='Enter')f()}});
-$('pc').onclick=()=>$('pop').classList.remove('on');
-document.querySelectorAll('#dif button').forEach(b=>b.onclick=()=>{D=DF[b.dataset.d];G=gen();left=D.t;$('tm').textContent=mmss(left);$('bc').textContent=G.enc;$('intro').classList.remove('on');ac=new(window.AudioContext||window.webkitAudioContext)();on=true;ok();hud();out("Sistem hazırdır. "+M[1]+"\nYardım üçün: help",'s');setTimeout(()=>out(HM[1],'e'),1500);inp.focus()});
-$('snd').onclick=()=>{sound=!sound;$('snd').lastElementChild.textContent=sound?'açıq':'bağlı'};
-function lose(){on=false;bad();pop("Vaxt bitdi!","Hacker qalib gəldi. Məlumatların silindi.\n\nXal: "+score+"\nKeçilən mərhələ: "+(stage-1)+"/5\n\nYenidən cəhd etmək üçün səhifəni yenilə.")}
-function win(){on=false;const r=score>=850?"Elite Hacker":score>=700?"Analitik":"Script Kiddie",el=D.t-left,a=[];if(!hints)a.push("İpucusuz");if(!wrong)a.push("Səhvsiz");if(el<D.t/2)a.push("Sürətli");$('dlock').textContent="AÇIQ";ok();setTimeout(()=>pop("Hacker bloklandı!","Noutbuk xilas edildi.\n\nXal: "+score+"\nVaxt: "+mmss(el)+"\nRütbə: "+r+"\nUğurlar: "+(a.join(", ")||"yoxdur")+"\n\nYenidən oynamaq üçün səhifəni yenilə: kodlar dəyişəcək."),400)}
-const FILES=()=>["mission.txt",...(stage>=3?["auth.log"]:[]),...(stage>=4?["secret.b64"]:[])];
-const CAT=f=>f==="mission.txt"?M[stage]:f==="auth.log"&&stage>=3?G.lg:f==="secret.b64"&&stage>=4?G.b64:null;
-inp.onkeydown=e=>{if(e.key!=='Enter'||!on)return;const v=inp.value.trim();inp.value='';if(!v)return;hist.push(v);out("$ "+v);const[c,...r]=v.split(/\s+/),arg=r.join(' ');
-if(/^(echo\s.*\|\s*)?base64/.test(v)){const t=(v.match(/[A-Za-z0-9+\/]{4,}={0,2}/g)||[]).filter(x=>x!=='base64'&&x!=='echo').pop();try{out(atob(t))}catch(x){out("base64: yanlış giriş",'e')}}
-else if(c==='help')out("ls  cat <fayl>  grep <söz> <fayl>  whoami  pwd  history  base64 -d <mətn>  unlock <kod>  hint  status");
-else if(c==='ls')out(FILES().join("   "));
-else if(c==='cat'){const t=CAT(arg);t?out(t):out("Fayl tapılmadı.",'e')}
-else if(c==='grep'){const t=CAT(r[1]);t?out(t.split("\n").filter(l=>l.includes(r[0])).join("\n")||"(nəticə yoxdur)"):out("grep: fayl tapılmadı",'e')}
-else if(c==='whoami')out("victim");else if(c==='pwd')out("/home/victim/hacker-room");else if(c==='history')out(hist.map((h,i)=>(i+1)+"  "+h).join("\n"));
-else if(c==='status')out("Mərhələ "+stage+"/5, xal "+score+", qalan vaxt "+mmss(left));
-else if(c==='hint'){score-=D.h;hints++;hud();out("Hint (-"+D.h+"): "+HT(),'h')}
-else if(c==='unlock'){if(arg.toLowerCase().replace(/\s/g,'')===ANS()){score+=100;stage++;hud();ok();if(stage>5){out("[+] Kill switch aktivdir! Hacker bloklandı. +100 xal",'s');win()}else{out("[+] Qapı "+(stage-1)+" açıldı! +100 xal\n"+M[stage],'s');setTimeout(()=>out(HM[stage],'e'),1200)}}else{score-=20;wrong++;hud();bad();out("[-] Yanlış kod. -20 xal",'e')}}
-else out("Naməlum əmr. help yaz.",'e')};
-const cv=$('rain'),cx=cv.getContext('2d');let cols,dr;
-function rs(){cv.width=innerWidth;cv.height=innerHeight;cols=Math.ceil(cv.width/16);dr=Array(cols).fill(0)}rs();addEventListener('resize',rs);
-setInterval(()=>{cx.fillStyle='rgba(10,18,16,.2)';cx.fillRect(0,0,cv.width,cv.height);cx.fillStyle='#39ff6a';cx.font='14px monospace';dr.forEach((y,i)=>{cx.fillText(Math.random()<.5?'0':'1',i*16,y*16);dr[i]=y*16>cv.height&&Math.random()>.97?0:y+1})},60);
-</script></body></html>
+<title>Kill Switch: Phantom</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main id="app">
+  <h1>Kill Switch: Phantom</h1>
+  <p>Yeni versiya hazırlanır.</p>
+  <p id="status">Yüklənir...</p>
+  <p><a href="legacy/index.html">Köhnə versiyanı oyna</a></p>
+</main>
+<!-- Sıra vacibdir: əvvəl əsas modullar, sonda main.js -->
+<script src="js/core/state.js"></script>
+<script src="js/core/save.js"></script>
+<script src="js/core/timer.js"></script>
+<script src="js/core/trace.js"></script>
+<script src="js/core/events.js"></script>
+<script src="js/ui/hud.js"></script>
+<script src="js/ui/inventory.js"></script>
+<script src="js/ui/map.js"></script>
+<script src="js/ui/dialog.js"></script>
+<script src="js/ui/popup.js"></script>
+<script src="js/ui/tools.js"></script>
+<script src="js/audio/music.js"></script>
+<script src="js/audio/sfx.js"></script>
+<script src="js/terminal/terminal.js"></script>
+<script src="js/rooms/act1.js"></script>
+<script src="js/rooms/act2.js"></script>
+<script src="js/rooms/act3.js"></script>
+<script src="js/rooms/act4.js"></script>
+<script src="js/rooms/final.js"></script>
+<script src="js/story/texts.js"></script>
+<script src="js/story/suspects.js"></script>
+<script src="js/story/endings.js"></script>
+<script src="js/story/facts.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

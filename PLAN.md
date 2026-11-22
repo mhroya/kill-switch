@@ -184,7 +184,7 @@ Yalnız dəqiq bildiyin faktları yaz. Əmin olmadığın faktı yazma. Yoxlanı
 Hər mərhələdən sonra: **dayan**, nə etdiyini qısa yaz, mənə nəyi yoxlamalı olduğumu de, commit et
 (Azərbaycanca mesajla), push et və mən "davam" yazana qədər gözlə. Bitən mərhələni burada `[x]` et.
 
-- [ ] **0. Hazırlıq** — köhnə `index.html`-i `legacy/index.html`-ə köçür; `CLAUDE.md`-ni yeni struktura uyğun yenilə
+- [x] **0. Hazırlıq** — köhnə `index.html`-i `legacy/index.html`-ə köçür; `CLAUDE.md`-ni yeni struktura uyğun yenilə
       (tək fayl qaydasını sil, bu PLAN.md-yə istinad əlavə et); qovluq strukturunu yarat.
 - [ ] **1. Mühərrik** — state, save/load, timer, iz sayğacı, xal, HUD, otaq sistemi, xəritə, inventar, popup-lar,
       çətinlik seçimi, giriş ekranı, debug rejimi. Test üçün boş otaqlarla.

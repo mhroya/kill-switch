@@ -1,0 +1,15 @@
+/* css/style.css — oyunun bütün stilləri. Skelet (Mərhələ 0), əsas dizayn Mərhələ 1-də. */
+:root {
+  color-scheme: dark;
+  --bg: #0a1210;
+  --panel: #12201a;
+  --line: #1f6b3a;
+  --g: #39ff6a;
+  --a: #ffc933;
+  --t: #d6efe0;
+  --m: #8fb9a0;
+}
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--t); font-family: 'Courier New', monospace; }
+#app { max-width: 640px; margin: 0 auto; padding: 32px 16px; }
+h1 { color: var(--g); }
+a { color: var(--a); }
